@@ -14,10 +14,10 @@ export default function Navbar() {
         </Link>
 
         <div className="flex gap-4 md:gap-10">
-          <Link className="hover:text-indigo-500" href="/create">
+          <Link className="hover:text-indigo-500" href="/login">
             Log in
           </Link>
-          <Link className="text-indigo-600" href="/create">
+          <Link className="text-indigo-600" href="/register">
             Sign up Free
           </Link>
         </div>

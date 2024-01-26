@@ -5,3 +5,7 @@
 .feature {
   @apply flex items-center gap-3 rounded-2xl text-lg;
 }
+
+.btn-primary {
+  @apply rounded-xl bg-indigo-500 px-5 py-4 text-lg text-white;
+}

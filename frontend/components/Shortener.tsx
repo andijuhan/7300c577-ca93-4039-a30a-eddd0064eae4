@@ -27,9 +27,7 @@ export default function Shortener() {
               className="w-full rounded-xl border p-4 text-lg focus:outline-none focus:ring-1 focus:ring-indigo-500"
             />
           </div>
-          <button className="hidden w-fit rounded-xl bg-indigo-500 px-5 py-4 text-lg text-white md:block">
-            Shorten
-          </button>
+          <button className="btn-primary hidden md:block">Shorten</button>
         </div>
         <div className="flex flex-col gap-2">
           <label
@@ -61,9 +59,7 @@ export default function Shortener() {
             <Copy size={20} />
           </button>
         </div>
-        <button className="w-full rounded-xl bg-indigo-500 px-5 py-4 text-lg text-white md:hidden">
-          Shorten
-        </button>
+        <button className="btn-primary w-full md:hidden">Shorten</button>
         <p className="text-center text-sm text-gray-600">
           By clicking Shorten URL, you agree to Rebrandly&apos;s{" "}
           <span className="underline">Terms of Use</span>,{" "}

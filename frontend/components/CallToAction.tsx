@@ -25,9 +25,7 @@ export default function CallToAction() {
           <p>Protect link</p>
         </div>
       </div>
-      <button className="w-fit rounded-xl bg-indigo-600 px-5 py-4 text-lg text-white">
-        Register & get more features
-      </button>
+      <button className="btn-primary">Register & get more features</button>
     </div>
   );
 }
