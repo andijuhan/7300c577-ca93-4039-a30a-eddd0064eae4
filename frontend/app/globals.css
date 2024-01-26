@@ -9,3 +9,7 @@
 .btn-primary {
   @apply rounded-xl bg-indigo-500 px-5 py-4 text-lg text-white;
 }
+
+.link {
+  @apply flex cursor-default items-center gap-4 rounded-md p-2.5 text-gray-800 hover:bg-gray-100 md:cursor-pointer;
+}

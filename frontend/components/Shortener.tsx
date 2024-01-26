@@ -50,11 +50,11 @@ export default function Shortener() {
         </div>
         <div className="flex w-full items-center gap-4 rounded-lg bg-teal-100 p-3">
           <p className="font-medium text-teal-800">
-            <Link href="#" target="_blank">
+            <Link href="#" target="_blank" className="animate-pulse">
               cutly.lol/short
             </Link>
           </p>
-          <button className="flex items-center gap-2 rounded-md border bg-gray-50 px-3 py-1">
+          <button className="flex items-center gap-2 rounded-md border bg-gray-50 px-3 py-1 hover:bg-white">
             Copy
             <Copy size={20} />
           </button>
