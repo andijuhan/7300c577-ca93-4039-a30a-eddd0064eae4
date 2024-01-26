@@ -20,10 +20,10 @@ export default function DashboardLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} flex min-h-screen w-full flex-col justify-between bg-gray-100`}
+        className={`${inter.className} flex min-h-screen w-full flex-col bg-gray-100`}
       >
         <Navbar />
-        <div className="m-auto flex w-full gap-10 pr-2">
+        <div className="mx-auto flex h-fit w-full grow gap-10 pr-2">
           <Sidebar />
           <main className="mx-auto mt-2 w-full max-w-5xl flex-1">
             {children}

@@ -4,8 +4,8 @@ import React from "react";
 
 export default function Sidebar() {
   return (
-    <aside className="min-h-screen w-full max-w-[200px] border bg-gray-50 px-4 py-10">
-      <div className="flex h-full flex-col">
+    <aside className="min-h-full w-full max-w-[200px] border-r bg-gray-50 px-4 py-10">
+      <div className="flex flex-col">
         <ul className="flex flex-col gap-1 overflow-x-hidden text-sm font-medium">
           <li>
             <Link href="/dashboard" className="link">
