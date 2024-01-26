@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.feature {
+  @apply flex items-center gap-3 rounded-2xl text-lg;
+}
