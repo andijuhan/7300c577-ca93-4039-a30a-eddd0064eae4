@@ -11,8 +11,6 @@ import {
   ChartData,
   ChartOptions,
 } from "chart.js";
-import { useEffect, useState } from "react";
-import { labels, clicks } from "@/data/shorturl-stats";
 
 ChartJs.register(
   CategoryScale,
@@ -23,9 +21,14 @@ ChartJs.register(
   Legend,
 );
 
-export default function Chart() {
+interface ChartProps {
+  labels: string[];
+  clicks: number[];
+}
+
+export default function Chart({ labels, clicks }: ChartProps) {
   const chartData: ChartData<"bar"> = {
-    labels,
+    labels: labels,
     datasets: [
       {
         label: "Clicks",
@@ -37,6 +40,15 @@ export default function Chart() {
   };
 
   const chartOptions: ChartOptions<"bar"> = {
+    scales: {
+      y: {
+        type: "linear", // Menggunakan skala linear pada sumbu Y
+        ticks: {
+          stepSize: 20, // Menetapkan langkah ukuran agar hanya menampilkan angka bulat pada sumbu Y
+        },
+        beginAtZero: true,
+      },
+    },
     plugins: {
       legend: {
         position: "top",

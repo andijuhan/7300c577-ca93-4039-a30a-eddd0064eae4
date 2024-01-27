@@ -4,7 +4,7 @@ import React from "react";
 
 export default function NavBar() {
   return (
-    <header className="z-50 flex w-full bg-gray-50 p-5 shadow-sm">
+    <header className="z-50 flex w-full border bg-gray-50 p-5 shadow-sm">
       <nav className="m-auto flex w-full items-center justify-between px-2 md:px-0">
         <Link href="/" className="flex items-center gap-1 text-rose-500">
           <Zap size={30} />
