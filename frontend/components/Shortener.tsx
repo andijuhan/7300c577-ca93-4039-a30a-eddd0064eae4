@@ -1,5 +1,5 @@
 "use client";
-import { Copy, Lock } from "lucide-react";
+import { Copy, Lock, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -8,7 +8,7 @@ export default function Shortener() {
   const [isShortened, setIsShortened] = useState(false);
 
   return (
-    <div className="flex flex-col gap-5 rounded-xl border-4 bg-gray-50 px-5 py-10 text-gray-800">
+    <div className="mx-auto flex w-full flex-col gap-5 rounded-xl border bg-gray-50 px-5 py-10 text-gray-800 shadow-sm md:px-7">
       <h2 className="text-3xl font-bold">Shorten a long link</h2>
       <form action="" className="flex flex-col gap-5">
         <div className="flex items-end gap-3">
@@ -48,17 +48,24 @@ export default function Shortener() {
             <Lock className="-ml-10 text-gray-500" />
           </div>
         </div>
-        <div className="flex w-full items-center gap-4 rounded-lg bg-teal-100 p-3">
-          <p className="font-medium text-teal-800">
-            <Link href="#" target="_blank" className="animate-pulse">
-              cutly.lol/short
-            </Link>
-          </p>
-          <button className="flex items-center gap-2 rounded-md border bg-gray-50 px-3 py-1 hover:bg-white">
-            Copy
-            <Copy size={20} />
-          </button>
-        </div>
+        {isShortened ? (
+          <div className="flex w-full items-center gap-4 rounded-lg bg-teal-100 p-3">
+            <p className="font-medium text-teal-800">
+              <Link href="#" target="_blank" className="animate-pulse">
+                cutly.lol/short
+              </Link>
+            </p>
+            <button className="flex items-center gap-2 rounded-md border bg-gray-50 px-3 py-1 hover:bg-white">
+              Copy
+              <Copy size={20} />
+            </button>
+          </div>
+        ) : (
+          <div className="flex w-full items-center gap-4 rounded-lg bg-teal-100 p-3 text-teal-800">
+            <p className="animate-pulse">waiting your action..</p>
+          </div>
+        )}
+
         <button className="btn-primary w-full md:hidden">Shorten</button>
         <p className="text-center text-sm text-gray-600">
           By clicking Shorten URL, you agree to Rebrandly&apos;s{" "}

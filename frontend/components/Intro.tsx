@@ -1,13 +1,14 @@
 export default function Intro() {
   return (
-    <div className="flex flex-col gap-4 text-center">
+    <div className="mx-auto flex max-w-3xl flex-col gap-4 text-center">
       <h2 className="text-6xl font-extrabold tracking-tight text-gray-800">
-        Make every <span className="text-indigo-500">connection</span> count
+        Your <span className="text-indigo-500">shortcut</span> to seamless
+        online navigation!
       </h2>
-      <p className="text-2xl leading-relaxed text-gray-600">
-        Create short links, QR Codes, and Link-in-bio pages. Share them
-        anywhere. Track what&apos;s working, and what&apos;s not. All inside the{" "}
-        <span className="font-semibold">Bitly Connections Platform.</span>
+      <p className="mx-auto max-w-2xl text-2xl leading-relaxed text-gray-600">
+        Create short links, share them anywhere. Track what&apos;s working, and
+        what&apos;s not. All inside the{" "}
+        <span className="font-semibold">Cutly.lol</span>
       </p>
     </div>
   );

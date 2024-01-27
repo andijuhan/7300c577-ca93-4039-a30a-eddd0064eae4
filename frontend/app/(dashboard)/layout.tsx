@@ -21,15 +21,15 @@ export default function DashboardLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} flex min-h-screen w-full flex-col bg-gray-100`}
+        className={`${inter.className} flex min-h-screen w-full min-w-[350px] flex-col bg-gray-100`}
       >
         <Navbar />
-        <div className="mx-auto flex h-fit w-full grow gap-10 pr-2">
-          <Sidebar />
+        <div className="mx-auto mt-16 flex h-fit w-full grow gap-10 pr-2">
           <main className="mx-auto mt-2 w-full max-w-5xl flex-1">
             {children}
           </main>
         </div>
+        <Sidebar />
         <Footer />
         <ToastProvider />
       </body>

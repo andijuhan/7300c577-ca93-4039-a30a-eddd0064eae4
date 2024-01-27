@@ -58,13 +58,17 @@ export default function Chart({ labels, clicks }: ChartProps) {
         text: "Daily clicks",
       },
     },
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     responsive: true,
   };
 
   return (
     <div className="flex w-full flex-col gap-3 rounded-xl border bg-gray-50 p-5 text-gray-800">
-      <Bar data={chartData} options={chartOptions} />
+      <Bar
+        data={chartData}
+        options={chartOptions}
+        className="min-h-[300px] md:min-h-[400px]"
+      />
     </div>
   );
 }

@@ -7,7 +7,7 @@
 }
 
 .btn-primary {
-  @apply rounded-xl bg-indigo-500 px-5 py-4 text-lg text-white;
+  @apply rounded-xl bg-indigo-600 px-5 py-4 text-lg text-white;
 }
 
 .link {

@@ -3,7 +3,7 @@ import CardItem from "./CardItem";
 
 export default function Cards() {
   return (
-    <div className="flex items-center gap-5">
+    <div className="flex flex-col items-center gap-5 md:flex-row">
       <CardItem title="Total links" count={100} icon={<Link size={30} />} />
       <CardItem
         title="Total click"

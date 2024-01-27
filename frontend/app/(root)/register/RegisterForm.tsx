@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function RegisterForm() {
   return (
-    <div className="w-full max-w-xl rounded-xl border bg-gray-50 p-5">
+    <div className="mx-auto w-full max-w-sm rounded-xl border bg-gray-50 px-5 py-7">
       <div className="space-y-3">
         <form className="flex flex-col gap-3">
           <div className="flex flex-col gap-2">
