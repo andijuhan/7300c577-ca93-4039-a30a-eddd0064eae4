@@ -1,7 +1,7 @@
-export interface IManageShortener {
-  id: string;
-  shortUrl: string;
-  destinationUrl: string;
-  created: Date;
+export interface IUrlShortener {
+  id: number;
+  shortSlug: string;
+  originalUrl: string;
+  createdAt: Date;
   clicks: number;
 }

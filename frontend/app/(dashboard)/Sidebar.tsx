@@ -13,15 +13,11 @@ export default function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link href="/dashboard" className="link">
+            <Link href="/dashboard/links" className="link">
               <LinkIcon size={20} /> Links
             </Link>
           </li>
-          <li>
-            <Link href="/dashboard" className="link">
-              <Wrench size={20} /> Tools
-            </Link>
-          </li>
+
           <li>
             <Link href="/dashboard" className="link">
               <Settings size={20} /> Settings

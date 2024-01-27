@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
+import ToastProvider from "@/providers/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function DashboardLayout({
           </main>
         </div>
         <Footer />
+        <ToastProvider />
       </body>
     </html>
   );
