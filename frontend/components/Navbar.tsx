@@ -8,7 +8,7 @@ export default function Navbar() {
       <nav className="m-auto flex w-full max-w-5xl items-center justify-between px-2 md:px-0">
         <Link href="/" className="flex items-center gap-1 text-rose-500">
           <Zap size={30} />
-          <h1 className="text-2xl font-bold tracking-tighter text-rose-500 md:text-4xl">
+          <h1 className="text-2xl font-bold tracking-tighter text-rose-500 md:text-3xl">
             cutly.lol
           </h1>
         </Link>
