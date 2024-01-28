@@ -13,7 +13,7 @@ export default function Footer() {
           </div>
         </div>
         <div>
-          <p>&copy; cutly.lol {new Date().getFullYear()}</p>
+          <p>&copy; moli.cx {new Date().getFullYear()}</p>
         </div>
       </div>
     </footer>

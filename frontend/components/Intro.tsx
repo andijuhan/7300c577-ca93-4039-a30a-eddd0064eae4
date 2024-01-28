@@ -8,7 +8,7 @@ export default function Intro() {
       <p className="mx-auto max-w-2xl text-2xl leading-relaxed text-gray-600">
         Create short links, share them anywhere. Track what&apos;s working, and
         what&apos;s not. All inside the{" "}
-        <span className="font-semibold">Cutly.lol</span>
+        <span className="font-semibold">moli.cx</span>
       </p>
     </div>
   );

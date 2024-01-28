@@ -3,6 +3,11 @@ import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { IUrlShortener } from "@/types/interface";
 import Heading from "@/components/Heading";
+import { Metadata } from "next/types";
+
+export const metadata: Metadata = {
+  title: "Dashboard link | Moli.cx",
+};
 
 async function getData(): Promise<IUrlShortener[]> {
   // Fetch data from your API here.

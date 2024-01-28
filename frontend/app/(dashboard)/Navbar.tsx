@@ -10,7 +10,7 @@ export default function NavBar() {
         <Link href="/" className="flex items-center gap-1 text-rose-500">
           <Zap size={30} />
           <h1 className="text-2xl font-bold tracking-tighter text-rose-500 md:text-3xl">
-            cutly.lol
+            moli.cx
           </h1>
         </Link>
 
