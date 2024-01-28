@@ -1,5 +1,5 @@
 "use client";
-import { IUrlShortener } from "@/types/interface";
+import { IShortUrl } from "@/types/interface";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { MoreHorizontal, ArrowUpDown } from "lucide-react";
@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
 
-export const columns: ColumnDef<IUrlShortener>[] = [
+export const columns: ColumnDef<IShortUrl>[] = [
   {
     accessorKey: "createdAt",
     header: ({ column }) => {

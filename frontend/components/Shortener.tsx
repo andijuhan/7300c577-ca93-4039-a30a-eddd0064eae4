@@ -3,7 +3,7 @@ import { Copy, Link as LinkIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { shortenSchema, TShorten } from "@/lib/validation";
+import { shortUrlSchema, TShortUrl } from "@/lib/validation";
 import toast from "react-hot-toast";
 
 export default function Shortener() {
@@ -17,11 +17,11 @@ export default function Shortener() {
     formState: { errors, isSubmitting },
     reset,
     setError,
-  } = useForm<TShorten>({
-    resolver: zodResolver(shortenSchema),
+  } = useForm<TShortUrl>({
+    resolver: zodResolver(shortUrlSchema),
   });
 
-  const onSubmit = async (data: TShorten) => {};
+  const onSubmit = async (data: TShortUrl) => {};
 
   return (
     <div className="mx-auto flex w-full flex-col gap-5 rounded-xl border bg-gray-50 px-5 py-10 text-gray-800 shadow-sm md:px-7">

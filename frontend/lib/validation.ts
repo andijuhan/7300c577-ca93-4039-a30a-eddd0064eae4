@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const shortenSchema = z.object({
+export const shortUrlSchema = z.object({
   originalUrl: z
     .string()
     .min(1, "Url is required")
@@ -27,6 +27,6 @@ export const registerSchema = z
     path: ["confirmPassword"],
   });
 
-export type TShorten = z.infer<typeof shortenSchema>;
+export type TShortUrl = z.infer<typeof shortUrlSchema>;
 export type TLogin = z.infer<typeof loginSchema>;
 export type TRegister = z.infer<typeof registerSchema>;

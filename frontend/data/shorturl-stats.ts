@@ -1,4 +1,4 @@
-import { IUrlShortener } from "@/types/interface";
+import { IShortUrl } from "@/types/interface";
 
 // Contoh data TypeScript
 type ClickData = {
@@ -17,7 +17,7 @@ const sampleData: ClickData[] = [
 export const labels: string[] = sampleData.map((data) => data.date);
 export const clicks: number[] = sampleData.map((data) => data.clicks);
 
-export const urlShorteners: IUrlShortener[] = [
+export const urlShorteners: IShortUrl[] = [
   {
     id: 1,
     shortSlug: "abcde",

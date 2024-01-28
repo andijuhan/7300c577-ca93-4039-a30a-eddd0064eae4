@@ -1,4 +1,4 @@
-export interface IUrlShortener {
+export interface IShortUrl {
   id: number;
   shortSlug: string;
   originalUrl: string;
