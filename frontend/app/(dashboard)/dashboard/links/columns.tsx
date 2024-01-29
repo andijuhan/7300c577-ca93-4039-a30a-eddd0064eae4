@@ -13,8 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
-
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:3000";
+import { baseUrl } from "@/config";
 
 export const columns: ColumnDef<IShortUrl>[] = [
   {

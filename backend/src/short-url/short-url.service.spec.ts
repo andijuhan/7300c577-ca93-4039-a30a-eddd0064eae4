@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ShortUrlService } from './short-url.service';
 
-describe('ShortenService', () => {
+describe('ShortUrlService', () => {
   let service: ShortUrlService;
 
   beforeEach(async () => {

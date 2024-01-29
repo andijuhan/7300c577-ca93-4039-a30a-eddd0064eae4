@@ -8,7 +8,7 @@ export class ShortUrlController {
 
   @Post()
   create(@Body() createShortUrlDto: CreateShortUrlDto) {
-    return this.shortUrlService.create(createShortUrlDto);
+    return this.shortUrlService.createShortUrl(createShortUrlDto);
   }
 
   @Get()
@@ -16,9 +16,9 @@ export class ShortUrlController {
     return this.shortUrlService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.shortUrlService.findOne(+id);
+  @Get(':shortSlug')
+  findOne(@Param('shortSlug') shortSlug: string) {
+    return this.shortUrlService.getOriginalUrl(shortSlug);
   }
 
   @Delete(':id')

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { nanoid } from 'nanoid';
 import { CreateShortUrlDto } from './dto/create-short-url.dto';
@@ -6,7 +6,7 @@ import { CreateShortUrlDto } from './dto/create-short-url.dto';
 @Injectable()
 export class ShortUrlService {
   constructor(private prisma: PrismaService) {}
-  async create(createShortUrlDto: CreateShortUrlDto) {
+  async createShortUrl(createShortUrlDto: CreateShortUrlDto) {
     const shortUrl = await this.prisma.url.create({
       select: {
         shortSlug: true,
@@ -24,8 +24,29 @@ export class ShortUrlService {
     return `This action returns all shorten`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} shorten`;
+  async getOriginalUrl(shortSlug: string) {
+    const originalUrl = await this.prisma.url.findUnique({
+      where: { shortSlug },
+      select: {
+        originalUrl: true,
+      },
+    });
+
+    if (!originalUrl) {
+      throw new NotFoundException('Url not found');
+    }
+
+    //increment clicks
+    await this.prisma.url.update({
+      where: { shortSlug },
+      data: {
+        clicks: {
+          increment: 1,
+        },
+      },
+    });
+
+    return originalUrl;
   }
 
   remove(id: number) {

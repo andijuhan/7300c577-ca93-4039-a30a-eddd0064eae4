@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ShortUrlController } from './short-url.controller';
 import { ShortUrlService } from './short-url.service';
 
-describe('ShortenController', () => {
+describe('ShortUrlController', () => {
   let controller: ShortUrlController;
 
   beforeEach(async () => {
