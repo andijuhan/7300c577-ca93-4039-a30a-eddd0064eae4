@@ -53,7 +53,7 @@ export default function Shortener() {
     if (copied) {
       setTimeout(() => {
         setCopied(false);
-      }, 3000);
+      }, 1000);
     }
   }, [showNotify, copied]);
 
