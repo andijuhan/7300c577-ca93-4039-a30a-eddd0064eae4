@@ -1,5 +1,6 @@
 "use client";
 import {
+  Clipboard,
   ClipboardCheck,
   ClipboardCopy,
   Copy,
@@ -81,7 +82,7 @@ export default function Shortener() {
                 />
                 <button
                   type="button"
-                  className="-ml-[110px] flex w-fit cursor-copy items-center gap-2 rounded-lg bg-teal-50 p-2 text-teal-800 hover:bg-gray-50"
+                  className="-ml-[110px] flex w-fit cursor-copy items-center gap-2 rounded-lg border bg-gray-50 p-2 text-gray-800 shadow-sm hover:bg-white"
                   onClick={async () => {
                     const text = await navigator.clipboard.readText();
                     setValue("originalUrl", text);
@@ -95,7 +96,7 @@ export default function Shortener() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="btn-primary hidden min-w-[120px] items-center justify-center md:flex"
+                className="btn-primary hidden min-w-[120px] items-center justify-center shadow-sm md:flex"
               >
                 {isSubmitting ? (
                   <Loader2 className="animate-spin" />
@@ -110,7 +111,7 @@ export default function Shortener() {
           </div>
         </div>
         {shortenedUrl.length > 0 ? (
-          <div className="flex w-full items-center justify-between gap-4 rounded-lg bg-teal-100 p-3">
+          <div className="flex w-full flex-col items-center justify-between gap-4 rounded-lg bg-teal-100 p-3 md:flex-row">
             <div
               className={`${showNotify && "animate-pulse"} flex items-center gap-4`}
             >
@@ -120,7 +121,7 @@ export default function Shortener() {
 
             <button
               type="button"
-              className="flex w-fit cursor-copy items-center gap-2 rounded-lg bg-teal-50 p-2 text-teal-800 hover:bg-gray-50"
+              className="flex w-full cursor-copy items-center justify-center gap-2 rounded-lg border bg-teal-50 p-2 text-teal-800 hover:bg-gray-50 md:w-[150px]"
               onClick={() => {
                 navigator.clipboard.writeText(shortenedUrl);
                 setCopied(true);
@@ -128,11 +129,11 @@ export default function Shortener() {
             >
               {copied ? (
                 <>
-                  Copied <ClipboardCheck />
+                  Copied <ClipboardCheck size={20} />
                 </>
               ) : (
                 <>
-                  Copy <Copy size={20} />
+                  Copy <Clipboard size={20} />
                 </>
               )}
             </button>

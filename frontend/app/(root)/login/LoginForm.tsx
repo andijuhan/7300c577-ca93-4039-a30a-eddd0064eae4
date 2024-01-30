@@ -1,6 +1,8 @@
 "use client";
+import { apiUrl } from "@/config";
 import { TLogin, loginSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { Eye } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -19,7 +21,19 @@ export default function LoginForm() {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (data: TLogin) => {};
+  const onSubmit = async (data: TLogin) => {
+    try {
+      const response = await axios.post(`${apiUrl}/auth/login`, data);
+      console.log(response.data);
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        setError("email", {
+          type: "server",
+          message: "Email or Password is incorrect.",
+        });
+      }
+    }
+  };
 
   function showHidePass() {
     setShowPassword(!showPassword);
