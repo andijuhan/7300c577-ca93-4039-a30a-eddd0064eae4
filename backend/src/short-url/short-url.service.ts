@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { nanoid } from 'nanoid';
-import { CreateShortUrlDto } from './dto/create-short-url.dto';
+import { CreateShortUrlDto } from './dto/short-url.dto';
 
 @Injectable()
 export class ShortUrlService {
   constructor(private prisma: PrismaService) {}
-  async createShortUrl(createShortUrlDto: CreateShortUrlDto) {
+  async shortenUrl(createShortUrlDto: CreateShortUrlDto) {
     const shortUrl = await this.prisma.url.create({
       select: {
         shortSlug: true,
@@ -20,7 +20,7 @@ export class ShortUrlService {
     return shortUrl;
   }
 
-  findAll() {
+  ShortUrl() {
     return `This action returns all shorten`;
   }
 
@@ -49,7 +49,7 @@ export class ShortUrlService {
     return originalUrl;
   }
 
-  remove(id: number) {
+  removeShortUrl(id: number) {
     return `This action removes a #${id} shorten`;
   }
 }
