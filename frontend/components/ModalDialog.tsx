@@ -13,10 +13,15 @@ import {
 
 interface ModalDialogProps {
   isOpen: boolean;
+  onClose: () => void;
   onConfirm: () => void;
 }
 
-export default function ModalDialog({ isOpen }: ModalDialogProps) {
+export default function ModalDialog({
+  isOpen,
+  onClose,
+  onConfirm,
+}: ModalDialogProps) {
   return (
     <AlertDialog open={isOpen}>
       <AlertDialogContent>
@@ -24,12 +29,19 @@ export default function ModalDialog({ isOpen }: ModalDialogProps) {
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            short url.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogCancel onClick={onClose}>Cancel</AlertDialogCancel>
+          <AlertDialogAction
+            onClick={() => {
+              onConfirm();
+              onClose();
+            }}
+          >
+            Continue
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

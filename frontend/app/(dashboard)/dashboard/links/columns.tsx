@@ -52,6 +52,9 @@ export const columns: ColumnDef<IShortUrl>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      return (row.getValue("clicks") as any[]).length;
+    },
   },
   {
     id: "actions",

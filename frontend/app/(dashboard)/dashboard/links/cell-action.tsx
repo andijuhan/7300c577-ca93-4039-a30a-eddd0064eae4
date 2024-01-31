@@ -25,6 +25,7 @@ interface CellActionProps {
 }
 
 export default function CellAction({ row }: CellActionProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const shortUrl = `${baseUrl}/${row.getValue("shortSlug")}`;
   const originalUrl = row.getValue("originalUrl") as string;
   const router = useRouter();
@@ -46,35 +47,44 @@ export default function CellAction({ row }: CellActionProps) {
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="h-8 w-8 p-0">
-          <span className="sr-only">Open menu</span>
-          <MoreHorizontal className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DropdownMenuItem
-          onClick={() => {
-            navigator.clipboard.writeText(originalUrl);
-            toast.success("Copied to clipboard");
-          }}
-        >
-          Copy original url
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => {
-            navigator.clipboard.writeText(shortUrl);
-            toast.success("Copied to clipboard");
-          }}
-        >
-          Copy short url
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>Delete short url</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <ModalDialog
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={deleteShortUrl}
+      />
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem
+            onClick={() => {
+              navigator.clipboard.writeText(originalUrl);
+              toast.success("Copied to clipboard");
+            }}
+          >
+            Copy original url
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() => {
+              navigator.clipboard.writeText(shortUrl);
+              toast.success("Copied to clipboard");
+            }}
+          >
+            Copy short url
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => setIsOpen(true)}>
+            Delete short url
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
 }

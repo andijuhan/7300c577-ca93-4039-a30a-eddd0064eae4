@@ -26,6 +26,9 @@ export class ShortUrlService {
       orderBy: {
         createdAt: 'desc',
       },
+      include: {
+        clicks: true,
+      },
     });
 
     return data;
@@ -34,10 +37,20 @@ export class ShortUrlService {
   async getInsightByUserId(userId: number) {
     const data = await this.prisma.url.findMany({
       where: { userId },
+      include: {
+        clicks: {
+          select: {
+            id: true,
+          },
+        },
+      },
     });
 
     const totalLink = data.length;
-    const totalClick = data.reduce((total, item) => total + item.clicks, 0);
+    const totalClick = data.reduce(
+      (total, item) => total + item.clicks.length,
+      0,
+    );
 
     return { totalLink, totalClick };
   }
@@ -47,20 +60,22 @@ export class ShortUrlService {
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
 
-    const data = await this.prisma.url.findMany({
+    const data = await this.prisma.click.findMany({
       where: {
-        userId,
-        createdAt: {
+        url: {
+          userId,
+        },
+        date: {
           gte: new Date(`${currentYear}-${currentMonth}`),
           lte: currentDate,
         },
       },
       orderBy: {
-        createdAt: 'desc',
+        date: 'desc',
       },
       select: {
-        createdAt: true,
-        clicks: true,
+        date: true,
+        click: true,
       },
     });
 
@@ -79,13 +94,9 @@ export class ShortUrlService {
       throw new NotFoundException('Url not found');
     }
 
-    //increment clicks
-    await this.prisma.url.update({
-      where: { shortSlug },
+    await this.prisma.click.create({
       data: {
-        clicks: {
-          increment: 1,
-        },
+        shortSlug,
       },
     });
 

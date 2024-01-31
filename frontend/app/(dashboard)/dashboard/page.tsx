@@ -18,16 +18,16 @@ async function getGraphData(userId: number, accessToken: string) {
   const rawData = response.data as any[];
 
   const reducedRawData = rawData.reduce((result, item) => {
-    const date = item.createdAt.slice(0, 10); // Mengambil bagian tanggal (tahun-bulan-tanggal)
+    const date = item.date.slice(0, 10); // Mengambil bagian tanggal (tahun-bulan-tanggal)
 
     // Mengecek apakah tanggal sudah ada dalam objek hasil atau belum
     if (!result[date]) {
       result[date] = {
         date: date,
-        clicks: item.clicks,
+        clicks: item.click,
       };
     } else {
-      result[date].clicks += item.clicks;
+      result[date].clicks += item.click;
     }
 
     return result;

@@ -14,7 +14,6 @@ model User {
   id       Int     @id @default(autoincrement())
   email    String  @unique
   password String
-  token    String?
   isActive Boolean @default(false)
   urls     Url[] // Relasi: satu User memiliki banyak Shorten
 
@@ -25,14 +24,24 @@ model User {
 }
 
 model Url {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   originalUrl String
-  shortSlug   String @unique
-  clicks      Int    @default(0)
+  shortSlug   String  @unique
   userId      Int? // Foreign key ke User
-  user        User?  @relation(fields: [userId], references: [id])
+  user        User?   @relation(fields: [userId], references: [id])
+  clicks      Click[]
 
   createdAt DateTime @default(now())
 
   @@map("urls")
+}
+
+model Click {
+  id        Int      @id @default(autoincrement())
+  date      DateTime @default(now())
+  click     Int      @default(1)
+  shortSlug String?
+  url       Url?     @relation(fields: [shortSlug], references: [shortSlug])
+
+  @@map("clicks")
 }

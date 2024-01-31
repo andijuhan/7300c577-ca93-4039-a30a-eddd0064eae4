@@ -17,9 +17,5 @@ export class CreateShortUrlDto {
 
   @IsOptional()
   @IsNumber()
-  clicks: number;
-
-  @IsOptional()
-  @IsNumber()
   userId: number;
 }
