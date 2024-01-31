@@ -40,9 +40,18 @@ export class ShortUrlService {
   }
 
   async getDailyStatsByUserId(userId: number) {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
+
     const data = await this.prisma.url.findMany({
-      where: { userId },
-      take: 30,
+      where: {
+        userId,
+        createdAt: {
+          gte: new Date(`${currentYear}-${currentMonth}`),
+          lte: currentDate,
+        },
+      },
       orderBy: {
         createdAt: 'desc',
       },

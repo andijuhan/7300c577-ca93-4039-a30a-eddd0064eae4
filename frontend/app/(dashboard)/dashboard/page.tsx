@@ -3,6 +3,8 @@ import Cards from "@/components/Cards";
 import Chart from "@/components/Chart";
 import Heading from "@/components/Heading";
 import { apiUrl } from "@/config";
+//import { labels, clicks } from "@/data/shorturl-stats";
+import { generateDefaultGraphData, getDaysInThisMonth } from "@/lib/utils";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 
@@ -13,7 +15,9 @@ async function getGraphData(userId: number, accessToken: string) {
     },
   });
 
-  const dataGraph = (response.data as any[]).reduce((result, item) => {
+  const rawData = response.data as any[];
+
+  const reducedRawData = rawData.reduce((result, item) => {
     const date = item.createdAt.slice(0, 10); // Mengambil bagian tanggal (tahun-bulan-tanggal)
 
     // Mengecek apakah tanggal sudah ada dalam objek hasil atau belum
@@ -30,8 +34,34 @@ async function getGraphData(userId: number, accessToken: string) {
   }, {});
 
   // Mengubah objek hasil menjadi array
-  const result = Object.values(dataGraph);
-  console.log(result);
+  const graphData = Object.values(reducedRawData);
+
+  const daysOfMonth = getDaysInThisMonth();
+
+  const defaultGraphData = generateDefaultGraphData(daysOfMonth);
+
+  const graphDataMontly = [...graphData, ...defaultGraphData] as any[];
+
+  const reduceGraphDataMontly = graphDataMontly.reduce((result, item) => {
+    const date = item.date;
+
+    // Mengecek apakah tanggal sudah ada dalam objek hasil atau belum
+    if (!result[date]) {
+      result[date] = {
+        date: date,
+        clicks: item.clicks,
+      };
+    } else {
+      result[date].clicks += item.clicks;
+    }
+
+    return result;
+  }, {});
+
+  const result = Object.values(reduceGraphDataMontly) as any[];
+
+  result.sort((a, b) => (new Date(a.date) as any) - (new Date(b.date) as any));
+
   return result;
 }
 
@@ -53,13 +83,12 @@ export default async function DashboardPage() {
   const userId = session?.user.id || 0;
   const accessToken = session?.backendToken.accessToken || "";
 
-  //const { date, clicks } = await getGraphData(userId, accessToken);
   const { totalLink, totalClick } = await getInsightData(userId, accessToken);
 
-  const dataGraph = await getGraphData(userId, accessToken);
+  const graphData = await getGraphData(userId, accessToken);
 
-  const labels = dataGraph.map((item: any) => item.date);
-  const clicks = dataGraph.map((item: any) => item.clicks);
+  const labels = graphData.map((item: any) => item.date);
+  const clicks = graphData.map((item: any) => item.clicks);
 
   return (
     <div className="flex flex-col gap-10 p-10">
