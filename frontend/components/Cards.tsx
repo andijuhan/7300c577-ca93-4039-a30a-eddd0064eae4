@@ -1,13 +1,22 @@
 import { Link, MousePointerClick } from "lucide-react";
 import CardItem from "./CardItem";
 
-export default function Cards() {
+interface CardProps {
+  totalLink: number;
+  totalClick: number;
+}
+
+export default function Cards({ totalLink, totalClick }: CardProps) {
   return (
     <div className="flex flex-col items-center gap-5 md:flex-row">
-      <CardItem title="Total links" count={100} icon={<Link size={30} />} />
+      <CardItem
+        title="Total links"
+        count={totalLink}
+        icon={<Link size={30} />}
+      />
       <CardItem
         title="Total click"
-        count={568}
+        count={totalClick}
         icon={<MousePointerClick size={30} />}
       />
     </div>

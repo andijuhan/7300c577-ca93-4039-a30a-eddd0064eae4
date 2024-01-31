@@ -14,8 +14,8 @@ const sampleData: ClickData[] = [
   { date: "2024-01-05", clicks: 180 },
 ];
 
-export const labels: string[] = sampleData.map((data) => data.date);
-export const clicks: number[] = sampleData.map((data) => data.clicks);
+// export const labels: string[] = sampleData.map((data) => data.date);
+// export const clicks: number[] = sampleData.map((data) => data.clicks);
 
 export const urlShorteners: IShortUrl[] = [
   {

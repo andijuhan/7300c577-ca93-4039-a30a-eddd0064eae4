@@ -46,4 +46,23 @@ export class AuthService {
 
     throw new UnauthorizedException('Invalid email or password');
   }
+
+  async refreshToken(user: any) {
+    const payload = {
+      sub: user.id,
+      email: user.email,
+      isActive: user.isActive,
+    };
+
+    return {
+      accessToken: await this.jwtService.signAsync(payload, {
+        expiresIn: '1d',
+        secret: process.env.JWT_SECRET_KEY,
+      }),
+      refreshToken: await this.jwtService.signAsync(payload, {
+        expiresIn: '7d',
+        secret: process.env.JWT_REFRESH_TOKEN,
+      }),
+    };
+  }
 }

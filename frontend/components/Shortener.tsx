@@ -3,7 +3,6 @@ import {
   Clipboard,
   ClipboardCheck,
   ClipboardCopy,
-  Copy,
   Link as LinkIcon,
   Loader2,
 } from "lucide-react";
@@ -14,9 +13,10 @@ import { shortUrlSchema, TShortUrl } from "@/lib/validation";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { apiUrl, baseUrl } from "@/config";
+import { useSession } from "next-auth/react";
 
 export default function Shortener() {
-  const [isAuth, setIsAuth] = useState(false);
+  const { data: session } = useSession();
   const [copied, setCopied] = useState(false);
   const [showNotify, setShowNotify] = useState(false);
   const [shortenedUrl, setShortenedUrl] = useState("");
@@ -33,7 +33,10 @@ export default function Shortener() {
   });
 
   const onSubmit = async (data: TShortUrl) => {
-    const response = await axios.post(`${apiUrl}/short-url`, data);
+    const response = await axios.post(`${apiUrl}/short-url`, {
+      originalUrl: data.originalUrl,
+      userId: session?.user.id,
+    });
 
     const shortUrl = `${baseUrl}/${response.data.shortSlug}`;
 

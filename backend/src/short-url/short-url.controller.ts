@@ -1,6 +1,15 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { ShortUrlService } from './short-url.service';
 import { CreateShortUrlDto } from './dto/short-url.dto';
+import { JwtGuard } from 'src/auth/guards/jwt.guard';
 
 @Controller('short-url')
 export class ShortUrlController {
@@ -11,9 +20,22 @@ export class ShortUrlController {
     return this.shortUrlService.shortenUrl(dto);
   }
 
-  @Get()
-  findAllShortUrls() {
-    return this.shortUrlService.ShortUrl();
+  @UseGuards(JwtGuard)
+  @Get('/data/:userId')
+  getShortUrlByUserId(@Param('userId') userId: string) {
+    return this.shortUrlService.getShortUrlsByUserId(+userId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('/stats/:userId')
+  getDailyStatsByUserId(@Param('userId') userId: string) {
+    return this.shortUrlService.getDailyStatsByUserId(+userId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('/insight/:userId')
+  getInsightByUserId(@Param('userId') userId: string) {
+    return this.shortUrlService.getInsightByUserId(+userId);
   }
 
   @Get(':shortSlug')

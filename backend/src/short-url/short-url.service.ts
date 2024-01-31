@@ -20,8 +20,39 @@ export class ShortUrlService {
     return shortUrl;
   }
 
-  ShortUrl() {
-    return `This action returns all shorten`;
+  async getShortUrlsByUserId(userId: number) {
+    const data = await this.prisma.url.findMany({
+      where: { userId },
+    });
+
+    return data;
+  }
+
+  async getInsightByUserId(userId: number) {
+    const data = await this.prisma.url.findMany({
+      where: { userId },
+    });
+
+    const totalLink = data.length;
+    const totalClick = data.reduce((total, item) => total + item.clicks, 0);
+
+    return { totalLink, totalClick };
+  }
+
+  async getDailyStatsByUserId(userId: number) {
+    const data = await this.prisma.url.findMany({
+      where: { userId },
+      take: 30,
+      orderBy: {
+        createdAt: 'desc',
+      },
+      select: {
+        createdAt: true,
+        clicks: true,
+      },
+    });
+
+    return data;
   }
 
   async getOriginalUrl(shortSlug: string) {

@@ -1,38 +1,36 @@
 "use client";
-import { apiUrl } from "@/config";
+import { baseUrl } from "@/config";
 import { TLogin, loginSchema } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { Eye } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
 
-export default function LoginForm() {
+interface LoginFormProps {
+  error?: string;
+}
+
+export default function LoginForm({ error }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
     setError,
   } = useForm<TLogin>({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = async (data: TLogin) => {
-    try {
-      const response = await axios.post(`${apiUrl}/auth/login`, data);
-      console.log(response.data);
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 401) {
-        setError("email", {
-          type: "server",
-          message: "Email or Password is incorrect.",
-        });
-      }
-    }
+    await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: true,
+      callbackUrl: `${baseUrl}/dashboard`,
+    });
   };
 
   function showHidePass() {
@@ -40,7 +38,12 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-sm rounded-xl border bg-gray-50 px-5 py-7">
+    <div className="mx-auto w-full max-w-sm space-y-3 rounded-xl border bg-gray-50 px-5 py-7">
+      {error && (
+        <div className="w-full rounded-md bg-red-100 py-3 text-center text-red-500">
+          <p>Authentication failed</p>
+        </div>
+      )}
       <div className="space-y-3">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -81,7 +84,11 @@ export default function LoginForm() {
               <p className="text-red-500">{`${errors.password.message}`}</p>
             )}
           </div>
-          <button type="submit" className="btn-primary mt-3 w-full">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="btn-primary mt-3 w-full "
+          >
             Login
           </button>
         </form>

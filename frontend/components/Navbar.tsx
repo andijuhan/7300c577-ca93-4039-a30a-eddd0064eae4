@@ -1,8 +1,12 @@
+"use client";
 import { Zap } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
 export default function Navbar() {
+  const { data: session } = useSession();
+
   return (
     <header className="fixed left-0 top-0 z-50 flex w-full bg-gray-50 px-3 py-5 shadow-sm">
       <nav className="m-auto flex w-full max-w-5xl items-center justify-between px-2 md:px-0">
@@ -14,12 +18,22 @@ export default function Navbar() {
         </Link>
 
         <div className="flex gap-4 md:gap-10">
-          <Link className="hover:text-indigo-500" href="/login">
-            Log in
-          </Link>
-          <Link className="text-indigo-600" href="/register">
-            Sign up Free
-          </Link>
+          {session && session.user ? (
+            <>
+              <Link className="hover:text-indigo-500" href="/dashboard">
+                Dashboard
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link className="hover:text-indigo-500" href="/login">
+                Log in
+              </Link>
+              <Link className="text-indigo-600" href="/register">
+                Sign up Free
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>
