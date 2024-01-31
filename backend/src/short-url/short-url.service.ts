@@ -23,6 +23,9 @@ export class ShortUrlService {
   async getShortUrlsByUserId(userId: number) {
     const data = await this.prisma.url.findMany({
       where: { userId },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
 
     return data;
@@ -89,7 +92,9 @@ export class ShortUrlService {
     return originalUrl;
   }
 
-  removeShortUrl(id: number) {
-    return `This action removes a #${id} shorten`;
+  async removeShortUrl(id: number) {
+    return await this.prisma.url.delete({
+      where: { id },
+    });
   }
 }
