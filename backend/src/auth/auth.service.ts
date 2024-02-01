@@ -23,11 +23,11 @@ export class AuthService {
       user,
       backendToken: {
         accessToken: await this.jwtService.signAsync(payload, {
-          expiresIn: '1d',
+          expiresIn: '30d',
           secret: process.env.JWT_SECRET_KEY,
         }),
         refreshToken: await this.jwtService.signAsync(payload, {
-          expiresIn: '7d',
+          expiresIn: '30d',
           secret: process.env.JWT_REFRESH_TOKEN,
         }),
       },
