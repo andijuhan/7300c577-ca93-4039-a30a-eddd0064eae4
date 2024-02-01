@@ -10,11 +10,13 @@ import {
 import { ShortUrlService } from './short-url.service';
 import { CreateShortUrlDto } from './dto/short-url.dto';
 import { JwtGuard } from 'src/auth/guards/jwt.guard';
+import { Throttle } from '@nestjs/throttler';
 
 @Controller('short-url')
 export class ShortUrlController {
   constructor(private readonly shortUrlService: ShortUrlService) {}
 
+  @Throttle({ default: { limit: 100, ttl: 10 * 1000 } }) // 100 req per 10 seconds
   @Post()
   createShortUrl(@Body() dto: CreateShortUrlDto) {
     return this.shortUrlService.shortenUrl(dto);
@@ -38,6 +40,7 @@ export class ShortUrlController {
     return this.shortUrlService.getInsightByUserId(+userId);
   }
 
+  @Throttle({ default: { limit: 100, ttl: 10 * 1000 } }) // 100 req per 10 seconds
   @Get(':shortSlug')
   getOriginalUrl(@Param('shortSlug') shortSlug: string) {
     return this.shortUrlService.getOriginalUrl(shortSlug);

@@ -1,11 +1,17 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { nanoid } from 'nanoid';
 import { CreateShortUrlDto } from './dto/short-url.dto';
+import { startOfMonth, endOfMonth, formatISO } from 'date-fns';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Cache } from 'cache-manager';
 
 @Injectable()
 export class ShortUrlService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+  ) {}
   async shortenUrl(createShortUrlDto: CreateShortUrlDto) {
     const shortUrl = await this.prisma.url.create({
       select: {
@@ -57,17 +63,22 @@ export class ShortUrlService {
 
   async getDailyStatsByUserId(userId: number) {
     const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1;
+
+    const startOfCurrentMonth = formatISO(startOfMonth(currentDate), {
+      representation: 'complete',
+    });
+    const endOfCurrentMonth = formatISO(endOfMonth(currentDate), {
+      representation: 'complete',
+    });
 
     const data = await this.prisma.click.findMany({
       where: {
+        date: {
+          gte: startOfCurrentMonth,
+          lte: endOfCurrentMonth,
+        },
         url: {
           userId,
-        },
-        date: {
-          gte: new Date(`${currentYear}-${currentMonth}`),
-          lte: currentDate,
         },
       },
       orderBy: {
@@ -83,12 +94,20 @@ export class ShortUrlService {
   }
 
   async getOriginalUrl(shortSlug: string) {
+    const cacheValue = await this.cacheManager.get(shortSlug);
+
+    if (cacheValue) {
+      return cacheValue;
+    }
+
     const originalUrl = await this.prisma.url.findUnique({
       where: { shortSlug },
       select: {
         originalUrl: true,
       },
     });
+
+    await this.cacheManager.set(shortSlug, originalUrl, 60 * 60 * 24);
 
     if (!originalUrl) {
       throw new NotFoundException('Url not found');
