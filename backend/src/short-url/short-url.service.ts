@@ -97,6 +97,7 @@ export class ShortUrlService {
     const cacheValue = await this.cacheManager.get(shortSlug);
 
     if (cacheValue) {
+      console.log('From redish cache');
       return cacheValue;
     }
 
@@ -107,7 +108,7 @@ export class ShortUrlService {
       },
     });
 
-    await this.cacheManager.set(shortSlug, originalUrl, 60 * 60 * 24);
+    await this.cacheManager.set(shortSlug, originalUrl, 1000 * 60 * 60 * 24); //cache for 1 day
 
     if (!originalUrl) {
       throw new NotFoundException('Url not found');
