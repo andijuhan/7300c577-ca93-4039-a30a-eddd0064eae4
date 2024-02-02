@@ -94,6 +94,13 @@ export class ShortUrlService {
   }
 
   async getOriginalUrl(shortSlug: string) {
+    //click counter
+    await this.prisma.click.create({
+      data: {
+        shortSlug,
+      },
+    });
+
     const cacheValue = await this.cacheManager.get(shortSlug);
 
     if (cacheValue) {
@@ -114,12 +121,7 @@ export class ShortUrlService {
       throw new NotFoundException('Url not found');
     }
 
-    await this.prisma.click.create({
-      data: {
-        shortSlug,
-      },
-    });
-
+    console.log('From API');
     return originalUrl;
   }
 
