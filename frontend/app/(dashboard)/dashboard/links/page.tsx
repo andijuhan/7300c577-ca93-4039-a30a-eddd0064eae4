@@ -5,9 +5,9 @@ import { IShortUrl } from "@/types/interface";
 import Heading from "@/components/Heading";
 import { Metadata } from "next/types";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import axios from "axios";
 import { apiUrl } from "@/config";
+import { authOptions } from "@/lib/next-auth-options";
 
 export const metadata: Metadata = {
   title: "Dashboard link | Moli.cx",

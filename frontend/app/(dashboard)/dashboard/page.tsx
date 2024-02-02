@@ -1,8 +1,8 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Cards from "@/components/Cards";
 import Chart from "@/components/Chart";
 import Heading from "@/components/Heading";
 import { apiUrl } from "@/config";
+import { authOptions } from "@/lib/next-auth-options";
 //import { labels, clicks } from "@/data/shorturl-stats";
 import { generateDefaultGraphData, getDaysInThisMonth } from "@/lib/utils";
 import axios from "axios";

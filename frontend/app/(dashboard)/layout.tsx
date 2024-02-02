@@ -6,9 +6,9 @@ import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import ToastProvider from "@/providers/ToastProvider";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import NextAuthProviders from "@/providers/NextAuthProviders";
+import { authOptions } from "@/lib/next-auth-options";
 
 const inter = Inter({ subsets: ["latin"] });
 

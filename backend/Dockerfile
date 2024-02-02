@@ -13,6 +13,10 @@ RUN npm install
 # Salin seluruh proyek ke dalam container
 COPY . .
 
+# Instal wait-for-it.sh
+RUN wget -O /usr/local/bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
+    chmod +x /usr/local/bin/wait-for-it.sh
+
 # Expose port yang digunakan oleh aplikasi NestJS
 EXPOSE 5000
 
@@ -25,4 +29,4 @@ ENV DATABASE_URL="postgresql://juhandi:aYlBZ4X78cPJ@localhost:5432/molicx?schema
     REDIS_PORT=6379
 
 # Generate Prisma Client, Build proyek Nest.js, dan jalankan migrasi dan aplikasi
-RUN npx prisma generate && npm run build && npm run migrate:dev && npm run start:dev
+CMD ["sh", "-c", "/usr/local/bin/wait-for-it.sh postgres:5432 -- npx prisma generate && npm run build && npx prisma migrate dev && npm run start:dev"]
