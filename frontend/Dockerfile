@@ -1,5 +1,5 @@
 # Gunakan base image Node.js dengan Alpine Linux
-FROM node:21-alpine
+FROM node:20
 
 # Set direktori kerja di dalam container
 WORKDIR /usr/src/app

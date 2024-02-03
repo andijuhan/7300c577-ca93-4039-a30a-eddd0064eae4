@@ -2,10 +2,12 @@ version: '3.8'
 services:
    postgres:
       image: postgres:latest
+      restart: always
       environment:
-         POSTGRES_USER: juhandi
-         POSTGRES_PASSWORD: aYlBZ4X78cPJ
-         POSTGRES_DB: molicx
+         - POSTGRES_PASSWORD=juhandi
+         - POSTGRES_PASSWORD=aYlBZ4X78cPJ
+         - POSTGRES_DB=molicx
+      container_name: postgres
       ports:
          - '5432:5432'
       networks:
@@ -21,6 +23,7 @@ services:
    nestjs_app:
       build:
          context: ./backend
+      container_name: nestjs-docker
       ports:
          - '5000:5000'
       depends_on:
@@ -32,6 +35,7 @@ services:
    nextjs_app:
       build:
          context: ./frontend
+      container_name: nextjs-docker
       ports:
          - '3000:3000'
       networks:
