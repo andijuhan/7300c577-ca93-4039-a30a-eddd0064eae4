@@ -4,7 +4,7 @@ services:
       image: postgres:latest
       restart: always
       environment:
-         - POSTGRES_PASSWORD=juhandi
+         - POSTGRES_USER=juhandi
          - POSTGRES_PASSWORD=aYlBZ4X78cPJ
          - POSTGRES_DB=molicx
       container_name: postgres
