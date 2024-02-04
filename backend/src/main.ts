@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.enableCors({
-    origin: [process.env.FRONT_END_URL || 'http://localhost:3000'], // Atur domain yang diizinkan
+    origin: '*', // Atur domain yang diizinkan
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Atur metode HTTP yang diizinkan
     credentials: true, // Aktifkan credentials (misalnya, cookie)
   });

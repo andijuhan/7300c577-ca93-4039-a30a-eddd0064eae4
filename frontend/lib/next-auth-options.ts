@@ -16,13 +16,14 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) return null;
 
         try {
-          const user = await axios.post(`${apiUrl}/auth/login`, {
+          const user = await axios.post(`${process.env.API_URL}/auth/login`, {
             email: credentials.email,
             password: credentials.password,
           });
 
           return user.data;
         } catch (error) {
+          console.log(error);
           return null;
         }
       },

@@ -38,7 +38,7 @@ export default function RegisterForm() {
       reset();
       toast.success("Register success");
     } catch (error) {
-      console.log(error as unknown);
+      console.log(error);
       if (axios.isAxiosError(error) && error.response?.status === 409) {
         setError("email", { type: "server", message: "Email already use" });
       }

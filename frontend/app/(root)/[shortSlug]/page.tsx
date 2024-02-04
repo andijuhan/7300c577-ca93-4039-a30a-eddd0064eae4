@@ -4,7 +4,9 @@ import { notFound, redirect } from "next/navigation";
 
 async function getOriginalUrl(shortSlug: string) {
   try {
-    const response = await axios.get(`${apiUrl}/short-url/${shortSlug}`);
+    const response = await axios.get(
+      `${process.env.API_URL}/short-url/${shortSlug}`,
+    );
 
     if (response.status === 404) {
       return null;

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 async function getData(): Promise<IShortUrl[]> {
   const session = await getServerSession(authOptions);
   const response = await axios.get(
-    `${apiUrl}/short-url/data/${session?.user.id}`,
+    `${process.env.API_URL}/short-url/data/${session?.user.id}`,
     {
       headers: {
         Authorization: `Bearer ${session?.backendToken.accessToken}`,

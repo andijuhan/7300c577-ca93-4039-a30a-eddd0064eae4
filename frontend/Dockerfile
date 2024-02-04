@@ -1,5 +1,5 @@
 # Gunakan base image Node.js dengan Alpine Linux
-FROM node:20
+FROM node:20-alpine
 
 # Set direktori kerja di dalam container
 WORKDIR /usr/src/app
@@ -14,9 +14,10 @@ RUN npm install
 COPY . .
 
 # Atur variabel lingkungan
-ENV NEXT_PUBLIC_BASE_URL="http://localhost:3000" \
-    NEXT_PUBLIC_API_URL="http://localhost:5000" \
-    AUTH_SECRET="b61e3d26e28669e5ecba8ee36cca120ee58200f470a257f84d488b9158ddd0c8"
+ENV NEXT_PUBLIC_BASE_URL=http://localhost:3000 \
+    NEXT_PUBLIC_API_URL=http://localhost:5000 \
+    API_URL=http://nestjs:5000 \
+    AUTH_SECRET=b61e3d26e28669e5ecba8ee36cca120ee58200f470a257f84d488b9158ddd0c8
 
 # Build proyek Next.js
 RUN npm run build

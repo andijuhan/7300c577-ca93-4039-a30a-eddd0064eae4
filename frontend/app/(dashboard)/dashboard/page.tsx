@@ -1,7 +1,6 @@
 import Cards from "@/components/Cards";
 import Chart from "@/components/Chart";
 import Heading from "@/components/Heading";
-import { apiUrl } from "@/config";
 import { authOptions } from "@/lib/next-auth-options";
 //import { labels, clicks } from "@/data/shorturl-stats";
 import { generateDefaultGraphData, getDaysInThisMonth } from "@/lib/utils";
@@ -9,11 +8,14 @@ import axios from "axios";
 import { getServerSession } from "next-auth";
 
 async function getGraphData(userId: number, accessToken: string) {
-  const response = await axios.get(`${apiUrl}/short-url/stats/${userId}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
+  const response = await axios.get(
+    `${process.env.API_URL}/short-url/stats/${userId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     },
-  });
+  );
 
   const rawData = response.data as any[];
 
@@ -66,11 +68,14 @@ async function getGraphData(userId: number, accessToken: string) {
 }
 
 async function getInsightData(userId: number, accessToken: string) {
-  const response = await axios.get(`${apiUrl}/short-url/insight/${userId}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
+  const response = await axios.get(
+    `${process.env.API_URL}/short-url/insight/${userId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
     },
-  });
+  );
 
   const totalLink = response.data.totalLink;
   const totalClick = response.data.totalClick;

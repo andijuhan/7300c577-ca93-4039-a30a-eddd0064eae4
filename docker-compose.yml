@@ -20,7 +20,7 @@ services:
       networks:
          - nestjs_network
 
-   nestjs_app:
+   nestjs:
       build:
          context: ./backend
       container_name: nestjs
@@ -32,7 +32,7 @@ services:
       networks:
          - nestjs_network
 
-   nextjs_app:
+   nextjs:
       build:
          context: ./frontend
       container_name: nextjs
