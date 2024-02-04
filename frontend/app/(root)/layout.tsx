@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import NextAuthProviders from "@/providers/NextAuthProviders";
+import ToastProvider from "@/providers/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <ToastProvider />
         </NextAuthProviders>
       </body>
     </html>

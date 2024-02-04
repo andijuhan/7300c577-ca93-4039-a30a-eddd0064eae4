@@ -18,21 +18,21 @@ export default function Sidebar() {
   }, [pathName, isLarge]);
 
   return (
-    <aside>
+    <>
       <div
         className={cn(
-          "fixed inset-0 top-[60px] z-[40] max-h-screen bg-black/10 backdrop-blur-sm transition-all duration-500 md:hidden",
+          "fixed inset-0 top-[60px] z-[40] max-h-screen bg-black/10 backdrop-blur-sm transition-all duration-500 sm:top-0 md:hidden",
           { "h-0 w-0 opacity-0": !isOpen },
         )}
         onClick={() => close()}
       ></div>
       <div
         className={cn(
-          "fixed inset-0 z-40 flex min-h-full w-full max-w-[200px] flex-col justify-between border-r bg-gray-50 px-4 py-10 shadow-md transition-all duration-300",
+          "fixed inset-0 z-40 flex min-h-full w-full max-w-[200px] flex-col justify-between border-r bg-gray-50 px-4 py-10 shadow-md transition-all duration-300 sm:relative sm:py-0",
           { "-translate-x-full transform": !isOpen },
         )}
       >
-        <div className="mt-16 flex flex-col">
+        <div className="mt-10 flex flex-col">
           <ul className="flex flex-col gap-1 overflow-x-hidden text-sm font-medium">
             <li>
               <Link href="/dashboard" className="link">
@@ -56,6 +56,6 @@ export default function Sidebar() {
           <LogOut size={20} /> Sign out
         </Link>
       </div>
-    </aside>
+    </>
   );
 }

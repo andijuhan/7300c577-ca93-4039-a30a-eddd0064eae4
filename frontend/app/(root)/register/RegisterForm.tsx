@@ -8,6 +8,7 @@ import { Eye } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,6 +35,8 @@ export default function RegisterForm() {
         password,
       });
       console.log(response.data);
+      reset();
+      toast.success("Register success");
     } catch (error) {
       console.log(error as unknown);
       if (axios.isAxiosError(error) && error.response?.status === 409) {

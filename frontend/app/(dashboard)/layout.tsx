@@ -34,12 +34,13 @@ export default async function DashboardLayout({
       >
         <NextAuthProviders>
           <Navbar />
-          <div className="mx-auto mt-16 flex h-fit w-full grow gap-10 pr-2">
+          <div className="mx-auto mt-16 flex h-fit w-full grow">
+            <Sidebar />
             <main className="mx-auto mt-2 w-full max-w-5xl flex-1">
               {children}
             </main>
           </div>
-          <Sidebar />
+
           <Footer />
           <ToastProvider />
         </NextAuthProviders>

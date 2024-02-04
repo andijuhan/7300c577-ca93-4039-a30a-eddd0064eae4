@@ -23,7 +23,7 @@ services:
    nestjs_app:
       build:
          context: ./backend
-      container_name: nestjs-docker
+      container_name: nestjs
       ports:
          - '5000:5000'
       depends_on:
@@ -35,7 +35,7 @@ services:
    nextjs_app:
       build:
          context: ./frontend
-      container_name: nextjs-docker
+      container_name: nextjs
       ports:
          - '3000:3000'
       networks:
