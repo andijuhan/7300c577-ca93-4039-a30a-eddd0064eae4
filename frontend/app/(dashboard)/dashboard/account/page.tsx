@@ -14,7 +14,7 @@ export default async function DemoPage() {
     <div className="flex flex-col gap-10 p-10">
       <Heading>Your account</Heading>
       <div>
-        <p>Email : {session?.user.email}</p>
+        <p className="font-medium text-gray-800">{session?.user.email}</p>
       </div>
     </div>
   );
