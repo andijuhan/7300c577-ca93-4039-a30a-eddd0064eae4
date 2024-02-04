@@ -46,7 +46,7 @@ export default function Sidebar() {
             </li>
 
             <li>
-              <Link href="/dashboard" className="link">
+              <Link href="/dashboard/account" className="link">
                 <User size={20} /> Account
               </Link>
             </li>
