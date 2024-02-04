@@ -29,7 +29,11 @@ export const columns: ColumnDef<IShortUrl>[] = [
     accessorKey: "originalUrl",
     header: "Original url",
     cell: ({ row }) => {
-      return <p className="line-clamp-1">{row.getValue("originalUrl")}</p>;
+      return (
+        <p className="line-clamp-1 md:w-[300px]">
+          {row.getValue("originalUrl")}
+        </p>
+      );
     },
   },
   {

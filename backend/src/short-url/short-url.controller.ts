@@ -16,7 +16,7 @@ import { Throttle } from '@nestjs/throttler';
 export class ShortUrlController {
   constructor(private readonly shortUrlService: ShortUrlService) {}
 
-  @Throttle({ default: { limit: 100, ttl: 10 * 1000 } }) // 100 req per 10 seconds
+  @Throttle({ default: { limit: 100, ttl: 60 * 1000 } }) // 100 req per minute
   @Post()
   createShortUrl(@Body() dto: CreateShortUrlDto) {
     return this.shortUrlService.shortenUrl(dto);
@@ -40,7 +40,7 @@ export class ShortUrlController {
     return this.shortUrlService.getInsightByUserId(+userId);
   }
 
-  @Throttle({ default: { limit: 100, ttl: 10 * 1000 } }) // 100 req per 10 seconds
+  @Throttle({ default: { limit: 100, ttl: 60 * 1000 } }) // 100 req per minute
   @Get(':shortSlug')
   getOriginalUrl(@Param('shortSlug') shortSlug: string) {
     return this.shortUrlService.getOriginalUrl(shortSlug);

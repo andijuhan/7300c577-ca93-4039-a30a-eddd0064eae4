@@ -2,7 +2,6 @@ import Cards from "@/components/Cards";
 import Chart from "@/components/Chart";
 import Heading from "@/components/Heading";
 import { authOptions } from "@/lib/next-auth-options";
-//import { labels, clicks } from "@/data/shorturl-stats";
 import { generateDefaultGraphData, getDaysInThisMonth } from "@/lib/utils";
 import axios from "axios";
 import { getServerSession } from "next-auth";
@@ -20,9 +19,8 @@ async function getGraphData(userId: number, accessToken: string) {
   const rawData = response.data as any[];
 
   const reducedRawData = rawData.reduce((result, item) => {
-    const date = item.date.slice(0, 10); // Mengambil bagian tanggal (tahun-bulan-tanggal)
+    const date = item.date.slice(0, 10);
 
-    // Mengecek apakah tanggal sudah ada dalam objek hasil atau belum
     if (!result[date]) {
       result[date] = {
         date: date,
@@ -67,6 +65,7 @@ async function getGraphData(userId: number, accessToken: string) {
   return result;
 }
 
+//insight data for card dashboard
 async function getInsightData(userId: number, accessToken: string) {
   const response = await axios.get(
     `${process.env.API_URL}/short-url/insight/${userId}`,

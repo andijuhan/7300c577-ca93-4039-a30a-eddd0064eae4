@@ -12,7 +12,7 @@ export class AuthController {
     private userService: UsersService,
   ) {}
 
-  @Throttle({ default: { limit: 5, ttl: 60 * 1000 } })
+  @Throttle({ default: { limit: 5, ttl: 60 * 1000 } }) // 5 requests per minuteS
   @Post('login')
   async login(@Body() dto: SignInDto) {
     return await this.authService.signIn(dto);
@@ -24,7 +24,7 @@ export class AuthController {
     return await this.authService.refreshToken(req.user);
   }
 
-  @Throttle({ default: { limit: 10, ttl: 30 * 1000 } })
+  @Throttle({ default: { limit: 10, ttl: 30 * 1000 } }) // 10 requests per minute
   @Post('register')
   async register(@Body() dto: SignInDto) {
     return await this.userService.createUser(dto);
