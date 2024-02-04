@@ -28,7 +28,7 @@ export default function Sidebar() {
       ></div>
       <div
         className={cn(
-          "fixed inset-0 z-40 flex min-h-full w-full max-w-[200px] flex-col justify-between border-r bg-gray-50 px-4 py-10 shadow-md transition-all duration-300 md:relative md:py-0",
+          "fixed inset-0 z-40 flex min-h-full w-full max-w-[200px] flex-col justify-between border-r bg-gray-50 px-4 py-16 shadow-md transition-all duration-300 md:relative md:py-0",
           { "-translate-x-full transform": !isOpen },
         )}
       >
